@@ -22,6 +22,7 @@ app.UseHttpsRedirection();
 app.MapPost("/enlist", (EnlistRequest enlistRequest, ILogger<Program> logger) =>
 {
     logger.LogInformation($"Recieved {enlistRequest}");
+    return "This is your token";
 })
 .WithName("enlist");
 
