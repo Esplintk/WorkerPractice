@@ -21,7 +21,7 @@ app.UseHttpsRedirection();
 
 app.MapPost("/move", ([FromBody] Location destination, ILogger<Program> logger) =>
 {
-    logger.LogInformation($"trying to mvoe to {destination}");
+    logger.LogInformation($"trying to move to {destination}");
 })
 .WithName("move");
 

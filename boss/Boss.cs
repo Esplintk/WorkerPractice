@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc;
 using shared;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +25,29 @@ app.MapPost("/enlist", (EnlistRequest enlistRequest, ILogger<Program> logger) =>
 })
 .WithName("enlist");
 
-app.MapGet("/bogus", () => "this is a new endpoint");
+
+app.MapGet("/done", ([FromBody]IToken token , ILogger<Program> logger) =>
+{
+    logger.LogInformation($"Token {token} has completed its job", token);
+})
+.WithName("done");
+
+
+
+app.MapPost("/start", ([FromBody]string password, ILogger<Program> logger) =>
+{
+    logger.LogInformation($"Start with {password}", password);
+})
+.WithName("start");
+
+
+
+app.MapGet("/status", (ILogger<Program> logger) =>
+{
+    logger.LogInformation($"Get of Status");
+})
+.WithName("status");
+
+
 
 app.Run();
