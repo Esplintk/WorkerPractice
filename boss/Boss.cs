@@ -1,3 +1,4 @@
+using boss;
 using Microsoft.AspNetCore.Mvc;
 using shared;
 var builder = WebApplication.CreateBuilder(args);
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<BossLogic>();
 
 var app = builder.Build();
 
@@ -35,10 +37,7 @@ app.MapGet("/done", ([FromBody]IToken token , ILogger<Program> logger) =>
 
 
 
-app.MapPost("/start", ([FromBody]string password, ILogger<Program> logger) =>
-{
-    logger.LogInformation($"Start with {password}", password);
-})
+app.MapGet("/start", (string password, BossLogic bossLogic) => bossLogic.StartRunning(password))
 .WithName("start");
 
 

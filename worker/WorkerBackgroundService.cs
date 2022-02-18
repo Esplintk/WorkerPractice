@@ -49,7 +49,7 @@ namespace worker
 
         private async Task enlistWithBoss()
         {
-            logger.LogInformation("Enlisting with the boss");
+            logger.LogInformation("---Enlisting with the boss---");
             var addressFeature = server.Features.Get<IServerAddressesFeature>();
             var httpAddress = addressFeature.Addresses.First(a => a.Contains("http://"));
             var uri = new Uri(httpAddress);
